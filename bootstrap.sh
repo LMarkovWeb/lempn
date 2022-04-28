@@ -42,9 +42,13 @@ systemctl start mysqld
 systemctl enable mysqld
 systemctl daemon-reload
 
-
-
-
 echo "============= [TASK 6] Install node ============="
-yum install nodejs -y
+
+curl -fsSL https://rpm.nodesource.com/setup_16.x | sudo bash -
+yum install -y nodejs
+echo "Node version:"
 node -v
+echo "npm version"
+npm -v
+# install pm2 manager
+npm i -g pm2
