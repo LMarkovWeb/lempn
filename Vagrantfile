@@ -21,7 +21,8 @@ Vagrant.configure("2") do |config|
     wb.vm.hostname = 'lemp.loc'
     wb.vm.network "private_network", ip: "192.168.20.221"
     wb.vm.provision "shell", path: "bootstrap.sh"
-    wb.vm.network "forwarded_port", id: "centos7_webmin", guest: 80, host: 8080, guest_ip: "10.0.2.15", host_ip: "127.0.0.1", protocol: "tcp"
+    wb.vm.network "forwarded_port", id: "centos7_lemp", guest: 80,   host: 8080, guest_ip: "10.0.2.15", host_ip: "127.0.0.1", protocol: "tcp"
+    wb.vm.network "forwarded_port", id: "centos7_lemp", guest: 3000, host: 3000, guest_ip: "10.0.2.15", host_ip: "127.0.0.1", protocol: "tcp"
   end
 
 end
