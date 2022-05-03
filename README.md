@@ -120,22 +120,57 @@ server {
 }
 ```
 
+### PHP-FPM
+
+Проверка порта:
+
+```
+netstat -tulpn | grep php-fpm
+```
+
+Просмотр файла конфигурации php-fpm
+
+```
+grep ^[^\;] /etc/php-fpm.d/www.conf
+```
+
+Установить пользователя в файле www.conf
+
+```
+user = nginx
+group = nginx
+```
+
+Перезапуск службы
+
+```
+systemctl restart php-fpm
+```
+
+## Ошибки
+
 **Ошибка Nginx "502 Bad Gateway"**  
-13: Permission denied в /var/log/nginx/error.log
+13: Permission denied в /var/log/nginx/error.log  
 и denied в  
-cat /var/log/audit/audit.log | grep nginx | grep denied
+cat /var/log/audit/**audit.log** | grep nginx | grep denied  
 Решение:
 
 ```
 setsebool -P httpd_can_network_connect 1
 ```
 
-### PHP-FPM
+**Ошибка 404 Not Found при доступе к /index.php**  
+failed (13: Permission denied) в /var/log/nginx/error.log  
+Временное отключение / включение Selinux
 
-...
+```
+setenforce Permissive
+setenforce Enforcing
+```
 
-## Acknowledgements
+для проверки причины ошибки.
+
+## Ссылки
 
 - [Habr. Разворачиваем Node.js-проект (Nuxt.js) на базе VDS с ОС Ubuntu Server](https://habr.com/ru/post/558178/)
 - [Развертывание сервера Nuxt (CentOS7 + nginx + pm2)](https://russianblogs.com/article/82881009510/)
-- [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
