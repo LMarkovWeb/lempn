@@ -7,7 +7,7 @@ echo "[TASK 1] Update"
 yum update -y
 
 echo "[TASK 2] Install utilites"
-yum install vim yum-utils mc wget -y
+yum install vim yum-utils mc wget net-tools -y
 
 echo "============= [TASK 3] Install nginx ============="
 yum install epel-release -y
